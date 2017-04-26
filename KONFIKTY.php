@@ -1,8 +1,8 @@
-linijka numer 1 
+
  * A web form that both generates and uses PHPMailer code.
  * revised, updated and corrected 27/02/2013
  * by matt.sturdy@gmail.com konflikty ikty ikty
- */
+ */sdssds
 require '../PHPMailerAutoload.php';
 $CFG['smtp_debug'] = 2; //0 == off, 1 for client output, 2 for client and server
 $CFG['smtp_debugoutput'] = 'html';
