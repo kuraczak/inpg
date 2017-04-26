@@ -6,7 +6,7 @@
 public class Palindromy {
  
 public static int f1(String s)
-{
+{kook
 int i, j;
 int n = s.length();
 int wynik=n;
