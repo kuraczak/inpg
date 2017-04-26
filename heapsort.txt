@@ -1,0 +1,103 @@
+//Program pobrany ze strony www.algorytm.org
+//Opracowa³ Micha³ Knasiecki
+unit Unit1;
+ 
+interface
+ 
+uses
+Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+StdCtrls;
+ 
+type
+TForm1 = class(TForm)
+ListBox1: TListBox;
+Button1: TButton;
+ListBox2: TListBox;
+Button2: TButton;
+procedure Button1Click(Sender: TObject);
+procedure Button2Click(Sender: TObject);
+private
+{ Private declarations }
+public
+{ Public declarations }
+end;
+tablica=array[1..10]of integer;
+var
+Form1: TForm1;
+a:tablica;//Tablica Ÿródlowa
+n:integer; //Liczba elementów (w listbox1) do posortowania
+implementation
+ 
+{$R *.DFM}
+procedure sort_up(k:integer); //Porz¹dkowanie stogu od dolu
+var l,v:integer;
+begin
+v:=a[k];
+l:=k div 2;
+while a[l]<v do
+begin
+a[k]:=a[l];
+k:=l;
+l:=l div 2;
+end;
+a[k]:=v;
+end;
+procedure sort_dn(k:integer);  //Porz¹dkowanie stogu od góry
+var j,v,p:integer;
+begin
+v:=a[k];
+while (k<=(n div 2)) do
+begin
+j:=2*k;
+if (j<n)and( a[j]<a[j+1]) then j:=j+1;
+if v<a[j] then
+begin
+p:=a[k];
+a[k]:=a[j];
+a[j]:=p;
+k:=j;
+end else begin a[k]:=v;break;end;
+end;
+end;
+procedure delete_root; //Usuwanie korzenia (najwiêkszego elementu
+var p:integer;
+begin                  //i przenoszenie ostatniego liscia w miejsce korzenia
+p:=a[n];//zapisanie ostatniego liscia
+a[n]:=a[1]; //przeniesienie korzenia (najwiêkszego elementu) do tablicy od koñca
+dec(n); //Po usuniêciu korzenia tablica Ÿródlowa zmniejsza siê o 1
+a[1]:=p; //Ostatni lisc staje siê korzeniem
+sort_dn(1); //Przywracanie porz¹dku po zmianie korzenia
+end;
+procedure build_heap;//porz¹dkowanie stogu w dól zaczynaj¹c od poprzednika ostatniego liscia
+var i:integer;
+begin
+for i:=(n div 2) downto 1 do sort_dn(i);
+end;
+procedure heap_sort; //Glówna procedura
+var m:integer;
+begin
+m:=n;
+build_heap;//po zbudowaniu drzewa binarnego nalerzy je uporz¹dkowac tak, by spelnialo warunek stogu
+repeat
+delete_root; //Gdy stóg jest gotowy mo¿na usuwac korzeñ
+until n=1;
+n:=m;
+end;
+procedure TForm1.Button1Click(Sender: TObject);
+var i:integer;
+begin
+n:=10;
+for i:=1 to 10 do a[i]:=strtoint(listbox1.items[i-1]); //pobieranie elementów z listboxa do tablicy wejsciowej
+heap_sort;//sortowanie
+listbox2.clear;
+for i:=1 to 10 do listbox2.items.add(inttostr(a[i]));//wypisywanie tablicy wynikowej w listbox
+end;
+procedure TForm1.Button2Click(Sender: TObject);
+var i:integer;
+begin
+randomize;
+listbox1.Clear;
+for i:=1 to 10 do listbox1.items.add(inttostr(random(100)));
+end;
+ 
+end.
