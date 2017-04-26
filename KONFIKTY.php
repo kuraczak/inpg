@@ -1,5 +1,5 @@
 <?php
-/*kokokoko
+/*kokokokoeurospoko
  * A web form that both generates and uses PHPMailer code.
  * revised, updated and corrected 27/02/2013
  * by matt.sturdy@gmail.com konflikty ikty ikty
