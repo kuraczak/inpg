@@ -1,0 +1,54 @@
+// Wyszukiwanie binarne
+// Data:   7.05.2008
+// (C)2012 mgr Jerzy Wa³aszek
+//---------------------------
+
+program prg;
+
+const N = 100;
+
+var
+  Z : array[0..N - 1] of integer;sdgfS
+  i,ip,ik,isr,k,L,p : integer;
+
+begin
+  randomize;
+
+  // wype³niamy tablicê Z[]
+
+  Z[0] := random(5);
+  for i := 1 to N - 1 do Z[i] := Z[i - 1] + random(5);
+
+  // generujemy klucz k
+
+  k := Z[0] + random(Z[N - 1] - Z[0] + 1);
+
+  // poszukujemy binarnie elementu k
+
+  L  := 0; p  := -1; ip := 0; ik := N - 1;
+  while ip <= ik do
+  begin
+    inc(L);
+    isr := (ip + ik) shr 1;
+    if Z[isr] = k then
+    begin
+      p := isr; break;
+    end
+    else if k < Z[isr] then ik := isr - 1
+    else                    ip := isr + 1;
+  end;
+
+  // wyœwietlamy wyniki
+
+  write(k,' : ');
+  if p >= 0 then write(p) else write('BRAK');
+  writeln(' : obiegi = ',L);
+  writeln;
+  for i := 0 to N - 1 do
+  begin
+    write(Z[i]:3);
+    if p = i then write('<') else write(' ');
+  end;
+  writeln;
+  writeln;
+end. 

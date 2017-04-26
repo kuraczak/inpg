@@ -1,0 +1,48 @@
+' Wyszukiwanie binarne
+' Data:   7.05.2008
+' (C)2012 mgr Jerzy Wa³aszek
+'---------------------------
+
+Const N = 100
+
+Dim As Integer Z(N-1),i,ip,ik,isr,k,L,p
+
+Randomize
+
+' wype³niamy tablicê Z[]
+
+Z(0) = Cint(Rnd * 4)
+For i = 1 To N - 1: Z(i) = Z(i-1) + Cint(Rnd * 4): Next
+
+' generujemy klucz k
+
+k = Z(0) + Cint(Rnd * (Z(N - 1) - Z(0)))
+
+' poszukujemy binarnie elementu k
+
+L  = 0: p  = -1: ip = 0: ik = N - 1
+While ip <= ik
+  L += 1
+  isr = (ip + ik) Shr 1
+  If Z(isr) = k Then
+    p = isr: Exit While
+  Elseif k < Z(isr) Then
+    ik = isr - 1
+  Else
+    ip = isr + 1
+  End If
+Wend
+
+' wyœwietlamy wyniki
+
+Print k;" : ";
+If p >= 0 Then Print p;: Else Print "BRAK";
+Print " : obiegi =";L
+Print
+For i = 0 To N - 1
+  Print Using "###";Z(i);
+  If p = i Then Print "<";: Else Print " ";
+Next
+Print
+Print
+End 
