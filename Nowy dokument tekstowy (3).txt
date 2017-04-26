@@ -1,5 +1,5 @@
-// Wyszukiwanie interpolacyjne
-// Data:   8.05.2008
+// Wyszukiwanie binarne
+// Data:   7.05.2008
 // (C)2012 mgr Jerzy Wa³aszek
 //---------------------------
 
@@ -27,21 +27,19 @@ int main()
 
   k = Z[0] + (rand() % (Z[N - 1] - Z[0] + 1));
 
-  // poszukujemy interpolacyjnie elementu k
+  // poszukujemy binarnie elementu k
 
   p = -1; L = ip = 0; ik = N - 1;
-  while((Z[ip] <= k) && (k <= Z[ik]))
+  while(ip <= ik)
   {
     L++;
-    isr = ip + (k-Z[ip])*(ik-ip) / (Z[ik]-Z[ip]);
+    isr = (ip + ik) >> 1;
     if(Z[isr] == k)
     {
       p = isr; break;
     }
-    else if(k < Z[isr])
-      ik = isr - 1;
-    else
-      ip = isr + 1;
+    else if(k < Z[isr]) ik = isr - 1;
+    else                ip = isr + 1;
   }
 
   // wyœwietlamy wyniki

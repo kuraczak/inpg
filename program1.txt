@@ -1,0 +1,63 @@
+// Ci¹g arytmetyczny
+// Data   : 6.02.2011
+// (C)2012 mgr Jerzy Wa³aszek
+//----------------------------
+
+program prg;
+
+var n,i : integer;
+    a,d : double;
+
+begin
+  readln(n,a,d);
+
+  for i := 1 to n do
+    write(a + (i - 1) * d:9:3,' ');
+
+  writeln;
+end. 
+
+// Ci¹g arytmetyczny
+// Data   : 6.02.2011
+// (C)2012 mgr Jerzy Wa³aszek
+//----------------------------
+
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+int main()
+{
+  int    n,i;
+  double a,d;
+
+  cout << fixed
+       << setprecision(3);
+
+  cin >> n >> a >> d;
+
+  for(i = 1; i <= n; i++)
+    cout << setw(9)
+         << a + (i - 1) * d
+         << " ";
+  
+  cout << endl;
+
+  return 0;
+} 
+' Ci¹g arytmetyczny
+' Data   : 6.02.2011
+' (C)2012 mgr Jerzy Wa³aszek
+'----------------------------
+
+Dim As Integer n,i
+Dim As Double a,d
+
+Input n,a,d
+
+For i = 1 To n
+  Print Using " #####.###";a + (i - 1) * d;
+Next
+Print
+End 

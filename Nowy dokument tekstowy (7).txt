@@ -1,0 +1,55 @@
+// Wyszukiwanie k-tego najwiêkszego elementu
+// Data:   9.05.2008
+// (C)2012 mgr Jerzy Wa³aszek
+//------------------------------------------
+
+program prg;
+
+const N = 40;
+
+var Z : array[0..N-1] of integer;
+    i,j,k,x,minZ,minp : integer;
+
+begin
+  randomize;
+
+  // Inicjujemy tablicê Z[]
+
+  for i := 0 to N - 1 do Z[i] := random(1000);
+
+  // Losujemy k
+
+  k := random(10) + 1;
+
+
+  // Wyœwietlamy zawartoœæ Z[]
+
+  for i := 0 to N - 1 do write(Z[i]:4);
+  writeln;
+  writeln;
+
+  // Sortujemy Z[]
+
+  for i := 0 to N - 2 do
+  begin
+    minZ := Z[i];
+    minp := i;
+    for j := i + 1 to N - 1 do
+      if Z[j] < minZ then
+      begin
+        minZ := Z[j]; minp := j;
+      end;
+    x := Z[i]; Z[i] := Z[minp]; Z[minp] := x;
+  end;
+
+  // Wyœwietlamy zawartoœæ Z[]
+
+  for i := 0 to N - 1 do write(Z[i]:4);
+  writeln;
+  writeln;
+
+  // Wyœwietlamy k oraz Z[N-k]
+
+  writeln(k,' : ',Z[N - k]);
+  writeln;
+end. 
